@@ -16,6 +16,22 @@
                 <h2>下载管理</h2>
                 <div class="input-group">
                     <input type="text" id="url" placeholder="输入YouTube视频或播放列表URL">
+                    <button onclick="getVideoInfo()">获取视频信息</button>
+                </div>
+                <div id="video-info" style="display: none;">
+                    <h3 id="video-title"></h3>
+                    <img id="video-thumbnail" style="max-width: 200px;">
+                    <div class="download-options">
+                        <div class="format-selection">
+                            <label>视频格式：</label>
+                            <select id="format-select">
+                                <option value="">选择清晰度...</option>
+                            </select>
+                        </div>
+                        <div class="extra-options">
+                            <label><input type="checkbox" id="download-subtitle"> 下载字幕</label>
+                        </div>
+                    </div>
                     <button onclick="startDownload()">开始下载</button>
                 </div>
             </section>
@@ -28,6 +44,7 @@
             </section>
         </main>
     </div>
+    <!-- 确保脚本在最后加载 -->
     <script src="/src/downloader.js"></script>
     <script src="/src/whisper.js"></script>
 </body>

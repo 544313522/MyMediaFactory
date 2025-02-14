@@ -21,9 +21,25 @@ for dir_path in STORAGE_CONFIG.values():
 def download():
     data = request.get_json()
     url = data.get('url')
+    options = data.get('options', {})
     
     if not url:
         return jsonify({'error': '请提供有效的URL'}), 400
+    
+    # 获取视频信息
+    video_info = downloader.get_video_info(url)
+    if not video_info:
+        return jsonify({'error': '无法获取视频信息'}), 400
+
+    # 开始下载
+    success = downloader.download_video(url, options)
+    if success:
+        return jsonify({
+            'message': '下载成功',
+            'title': video_info.title
+        })
+    else:
+        return jsonify({'error': '下载失败'}), 500
     
     try:
         # 获取视频信息
@@ -58,6 +74,29 @@ def transcribe():
     
     # TODO: 将转写任务添加到队列
     return jsonify({'message': '任务已添加到队列'})
+
+@app.route('/api/video-info', methods=['POST'])
+@app.route('/api/video-info', methods=['POST'])
+def get_video_info():
+    print("收到视频信息请求")  # 添加调试日志
+    data = request.get_json()
+    url = data.get('url')
+    
+    if not url:
+        return jsonify({'error': '请提供有效的URL'}), 400
+    
+    print(f"正在获取视频信息: {url}")  # 添加调试日志
+    video_info = downloader.get_video_info(url)
+    if not video_info:
+        return jsonify({'error': '无法获取视频信息'}), 400
+
+    print("成功获取视频信息")  # 添加调试日志
+    return jsonify({
+        'title': video_info.title,
+        'duration': video_info.duration,
+        'formats': [vars(f) for f in video_info.formats],
+        'thumbnail': video_info.thumbnail
+    })
 
 if __name__ == '__main__':
     app.run(host=SERVER_HOST, port=SERVER_PORT, debug=True)
