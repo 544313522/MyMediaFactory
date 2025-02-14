@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>媒体工厂</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>媒体工厂</h1>
+        </header>
+        <main>
+            <section id="downloader">
+                <h2>下载管理</h2>
+                <div class="input-group">
+                    <input type="text" id="url" placeholder="输入YouTube视频或播放列表URL">
+                    <button onclick="startDownload()">开始下载</button>
+                </div>
+            </section>
+            <section id="whisper">
+                <h2>AI转写</h2>
+                <div class="file-upload">
+                    <input type="file" id="audioFile" accept="audio/*,video/*">
+                    <button onclick="startTranscription()">开始转写</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="/src/downloader.js"></script>
+    <script src="/src/whisper.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Node.js
+node_modules/
+dist/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+storage/input/*
+storage/output/*
+storage/processing/*
+!storage/input/.gitkeep
+!storage/output/.gitkeep
+!storage/processing/.gitkeep
+
+# System
+.DS_Store
+Thumbs.db
