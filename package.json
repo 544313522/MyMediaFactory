@@ -4,7 +4,7 @@
   "description": "一个集成了 youtube-dl、ffmpeg 和 Whisper AI 的媒体处理工厂",
   "main": "backend/server.py",
   "scripts": {
-    "start": "python backend/server.py",
+    "start": "python3 backend/server.py",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

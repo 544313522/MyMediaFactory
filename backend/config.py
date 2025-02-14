@@ -2,7 +2,7 @@
 
 # 服务器配置
 SERVER_HOST = '127.0.0.1'
-SERVER_PORT = 8000
+SERVER_PORT = 3000  # 修改为新的端口号
 
 # 存储路径配置
 STORAGE_CONFIG = {

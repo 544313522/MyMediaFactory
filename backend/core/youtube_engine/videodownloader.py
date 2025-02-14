@@ -34,18 +34,21 @@ class VideoDownloader:
         }
 
     def get_video_info(self, url: str) -> Optional[VideoInfo]:
-        """获取视频信息和可用的格式"""
         try:
             with yt_dlp.YoutubeDL(self.ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=False)
                 formats = []
                 for f in info.get('formats', []):
                     if f.get('vcodec') != 'none' and f.get('acodec') != 'none':
+                        # 安全地处理文件大小
+                        filesize = f.get('filesize', 0)
+                        size_mb = filesize / (1024 * 1024) if filesize else 0
+                        
                         formats.append(VideoFormat(
                             format_id=f['format_id'],
                             ext=f['ext'],
                             resolution=f.get('resolution', 'N/A'),
-                            filesize=f.get('filesize', 0) / (1024 * 1024),  # Convert to MB
+                            filesize=size_mb,
                             format_note=f.get('format_note', '')
                         ))
 
